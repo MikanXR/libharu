@@ -26,11 +26,13 @@ _libs
 *.tmp
 *.so
 *.so.*
+build
 cscope.out
 config.guess
 config.sub
 configure
 configure.in~
+dist
 libtool
 ltmain.sh
 _configs.sed
