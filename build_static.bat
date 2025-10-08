@@ -70,9 +70,22 @@ if errorlevel 1 (
 cd ..
 echo Done.
 
-:: Step 6: Extract version numbers and create zip
+:: Step 6: Copy dependency libraries
 echo.
-echo [6/6] Creating versioned zip file...
+echo [6/7] Copying dependency libraries to dist folder...
+if exist "build\_deps\zlib-build\Release\zlibstatic.lib" (
+    echo Copying zlibstatic.lib...
+    copy "build\_deps\zlib-build\Release\zlibstatic.lib" "dist\lib\"
+)
+if exist "build\_deps\libpng-build\Release\libpng16_static.lib" (
+    echo Copying libpng16_static.lib...
+    copy "build\_deps\libpng-build\Release\libpng16_static.lib" "dist\lib\"
+)
+echo Done.
+
+:: Step 7: Extract version numbers and create zip
+echo.
+echo [7/7] Creating versioned zip file...
 
 :: Extract version numbers from hpdf_version.h
 for /f "usebackq tokens=3" %%a in (`findstr /C:"#define HPDF_MAJOR_VERSION " include\hpdf_version.h ^| findstr /V "HPDF_VERSION_ID HPDF_VERSION_TEXT"`) do if not defined MAJOR set MAJOR=%%a
